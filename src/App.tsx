@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Header from "./components/Header"
 import CardList from "./components/CardList"
 import CardType from "./types/CardType"
-import { characterToCard } from './utils/Mapper';
+import { characterToCard } from './utils/MapperUtil';
 import { getPersonagens } from './services/ApiServices';
 
 const App = () => {
@@ -12,7 +12,7 @@ const App = () => {
   useEffect(() => {
     getPersonagens()
       .then(response => {
-        const card = characterToCard(response.data).filter(f => f.foto);
+        const card = characterToCard(response.data).filter((f: CardType)  => f.foto);
         setPersonagens([...card]);
       })
   }, [getPersonagens]);
