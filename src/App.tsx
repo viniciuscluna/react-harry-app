@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import Header from "./components/Header"
 import CardList from "./components/CardList"
 import CardType from "./types/CardType"
-import { getPersonagens } from './services/ApiServices';
 import { characterToCard } from './utils/Mapper';
+import { getPersonagens } from './services/ApiServices';
 
 const App = () => {
 
