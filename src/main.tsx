@@ -1,10 +1,37 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import '../src/scss/styles.scss'
+import Personagens from './pages/Personagens'
+import Magias from './pages/Magias'
+import ErrorPage from './pages/Error'
+import Default from './pages/Default'
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true, element: <Default />
+      },
+      {
+        path: "/personagens",
+        element: <Personagens />
+      },
+      {
+        path: "/magias",
+        element: <Magias />,
+      }
+    ]
+  }
+]);
+
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 )

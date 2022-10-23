@@ -1,12 +1,15 @@
-import CardListType from "../types/CardListType";
-import CardType from "../types/CardType";
+import PersonagemType from "../types/PersonagemType";
 import Card from "./Card";
 
-export default (type: CardListType) => 
+type Props = {
+    cards: PersonagemType[]
+}
+
+export default  ({cards}: Props) => 
 {
     return (
         <div className="row">
-            {type.cards && type.cards.map((card: CardType, index: number) =>
+            {cards && cards.map((card: PersonagemType, index: number) =>
                 <Card key={index} {...card} />
             )}
         </div>

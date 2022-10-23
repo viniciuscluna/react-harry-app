@@ -1,8 +1,8 @@
-import CardType from "../types/CardType";
+import PersonagemType from "../types/PersonagemType";
 
 const cardStyle: React.CSSProperties = { width: '18rem' };
 
-export default (card: CardType) => (
+export default (card: PersonagemType) => (
   <div className="card col-2" style={cardStyle}>
     <img src={card.foto} className="card-img-top card-personagem" alt={card.nome} />
     <div className="card-body">

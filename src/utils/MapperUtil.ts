@@ -1,5 +1,5 @@
-import CharacterType from "../models/CharacterType";
-import CardType from "../types/CardType";
+import CharacterType from "../types/CharacterType";
+import PersonagemType from "../types/PersonagemType";
 
 const checkRaca = (wizard: string): string => {
     switch (wizard) {
@@ -14,9 +14,9 @@ const checkRaca = (wizard: string): string => {
     }
 }
 
-export const characterToCard = (characterList: CharacterType[]): CardType[] => {
+export const characterToCard = (characterList: CharacterType[]): PersonagemType[] => {
     return characterList.map(character => {
-        const card: CardType = {
+        const card: PersonagemType = {
             nome: character.name,
             bruxo: character.wizard,
             foto: character.image,
