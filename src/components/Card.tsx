@@ -1,6 +1,6 @@
 import PersonagemType from "../types/PersonagemType";
 
-const cardStyle: React.CSSProperties = { width: '18rem' };
+const cardStyle: React.CSSProperties = { width: '18rem'};
 
 export default (card: PersonagemType) => (
   <div className="card col-2" style={cardStyle}>

@@ -8,7 +8,7 @@ type Props = {
 export default  ({cards}: Props) => 
 {
     return (
-        <div className="row">
+        <div className="row d-flex justify-content-around gy-4">
             {cards && cards.map((card: PersonagemType, index: number) =>
                 <Card key={index} {...card} />
             )}
