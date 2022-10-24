@@ -1,39 +1,19 @@
-# Foobar
+## Explanation
+This project uses [React](https://pt-br.reactjs.org/) [18](https://pt-br.reactjs.org/), [axious](https://axios-http.com/ptbr/docs/intro) and [React](https://reactrouter.com/en/main) [Router](https://reactrouter.com/en/main) [6](https://reactrouter.com/en/main)
+It's a simple harry potter portfolio
+## Sample site
 
-Foobar is a Python library for dealing with word pluralization.
-
-## Example
-
-[Example site](https://react-harry-app.vercel.app/)
+See how the [site](https://react-harry-app.vercel.app/) works.
 
 
 ## Installation
 
-Example site [pip](https://react-harry-app.vercel.app/) to install foobar.
-
+Please open your terminal and type :
 ```bash
-pip install foobar
+yarn 
+yarn dev
+
 ```
-
-## Usage
-
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
-```
-
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+ Use the code as you please, [MIT](https://choosealicense.com/licenses/mit/)
