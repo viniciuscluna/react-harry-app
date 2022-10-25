@@ -4,7 +4,7 @@ import PersonagemType from "../types/PersonagemType"
 import { getPersonagens } from '../services/apiService';
 import LoadingCard from '../components/LoadingCard';
 
-const App = () => {
+export default () => {
   const [carregando, setCarregando] = useState<boolean>(true);
   const [personagens, setPersonagens] = useState<PersonagemType[]>([]);
   const [personagensFiltrados, setPersonagensFiltrados] = useState<PersonagemType[]>(personagens);
@@ -42,4 +42,3 @@ const App = () => {
   )
 }
 
-export default App
