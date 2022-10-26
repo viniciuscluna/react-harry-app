@@ -18,9 +18,9 @@ const App = () => {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div className={`theme-${theme}`}>
+      <div className={`theme-${theme} min-vh-100`}>
         <Header />
-        <div className="container-fluid content-body">
+        <div className="container-fluid content-body ">
           <Outlet />
         </div>
       </div>

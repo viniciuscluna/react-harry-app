@@ -1,139 +1,27 @@
 @import './theme-variables.scss';
 @import "~bootstrap/scss/bootstrap";
 
-.card-personagem {
-    max-height: 20rem;
-    max-width: 15rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5px;
-    border-radius: 15px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: rgba(112, 112, 112, 0.644);
+.theme-dark {
+    background-color: #222736;
 }
 
 
-.search-input:focus {
-    box-shadow: 0 0 0 0.25rem rgba(163, 163, 163, 0.315);
-    border-color: grey
-}
+
 
 .gustavo-potter-header {
     font-size: 5rem;
     font-family: 'Harry Potter', sans-serif;
-}
-
-/*Header styles*/
-.navbar {
-    @include themify($themes) {
-        background-color: themed('colorHeaderFooter');
-    }
-    .container-fluid {
-        a {
-            @include themify($themes) {
-                color: themed('colorText');
-              }
-        }
-
-        .toggle-btn-section {
-            margin: auto 0 auto auto;
-
-            .toggle-checkbox {
-                justify-content: center;
-                display: inline-flex;
-                align-items: center;
-                cursor: pointer;
-
-                .toggle-btn__input {
-                    height: 0;
-                    width: 0;
-                    visibility: hidden;
-                }
-
-                .toggle-btn__input-label {
-                    cursor: pointer;
-                    text-indent: -9999px;
-                    width: 46px;
-                    height: 20px;
-                    display: block;
-                    border-radius: 23px;
-                    position: relative;
-                    border: none;
-                    margin-top: 2px;
-
-                    @include themify($themes) {
-                        background-color: themed('toggleBackground');
-                    }
-
-                    &::after {
-                        content: '?';
-                        position: absolute;
-                        top: 3px;
-                        left: 3px;
-                        width: 14px;
-                        height: 14px;
-                        border-radius: 50%;
-                        transition: 0.3s;
-                        box-shadow: 0 5px 10px rgba(153, 153, 153, 0.4);
-                        background-color: #fff;
-                    }
-                }
-
-                .toggle-btn__input:checked~.toggle-btn__input-label {
-                    &:after {
-                        background: #fff;
-                        left: calc(100% - 3px);
-                        transform: translateX(-100%);
-                    }
-                }
-
-                .toggle-btn__input:checked~.toggle-btn__theme {
-                    &:after {
-                        // theme switch circle background in light theme
-                        background: #fff;
-                        left: calc(100% - 3px);
-                        transform: translateX(-100%);
-                    }
-                }
-            }
-
-            .toggle-btn__input:checked~.toggle-btn__input-label {
-                background-color: #82deff;
-            }
-        }
-    }
-}
-
-/*Layout wrapper styles*/
-
-.layout-wrapper {
-    @include themify($themes) {
-        background: themed('bodyBackgroundColor');
-    }
-}
-
-.main-wrapper {
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 78px);
-}
-
-/*Footer styles*/
-.footer {
-    width: 100%;
-    z-index: 99;
-    height: 78px;
-    display: flex;
 
     @include themify($themes) {
-        background: themed('headerFooterBackground');
-        color: themed('textColor');
+        color: themed('colorText');
     }
+}
 
-    .footer-content {
-        text-align: center;
-        max-width: 1200px;
-        margin: auto;
+
+h3,
+table {
+    @include themify($themes) {
+        color: themed('colorText');
+        border-color: themed('colorBorder');
     }
 }

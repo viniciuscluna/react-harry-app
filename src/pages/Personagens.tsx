@@ -3,6 +3,7 @@ import CardList from "../components/CardList"
 import PersonagemType from "../types/PersonagemType"
 import { getPersonagens } from '../services/apiService';
 import LoadingCard from '../components/LoadingCard';
+import './Personagens.scss';
 
 export default () => {
   const [carregando, setCarregando] = useState<boolean>(true);
@@ -28,15 +29,17 @@ export default () => {
   }
 
   return (
-    <div className="mx-3 m-2">
+    <div className="mx-3 p-2 row page-personagens">
       <h3 className='my-4'>Personagens</h3>
-      <input
-        className="form-control my-3 search-input"
-        type="text"
-        placeholder="Pesquisar"
-        aria-label="Pesquisar"
-        autoFocus={true}
-        onChange={(e: React.FormEvent<HTMLInputElement>) => changeSearch(e.currentTarget.value)}></input>
+      <div className="row">
+        <input
+          className="form-control mt-2 search-input"
+          type="text"
+          placeholder="Pesquisar"
+          aria-label="Pesquisar"
+          autoFocus={true}
+          onChange={(e: React.FormEvent<HTMLInputElement>) => changeSearch(e.currentTarget.value)}></input>
+      </div>
       {carregando ? <LoadingCard /> : <CardList cards={personagensFiltrados} />}
     </div>
   )

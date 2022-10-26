@@ -1,6 +1,6 @@
 
 export default () => (
-    <div className="mt-2">
-      <h2 className="gustavo-potter-header">Gustavo Potter</h2>
+    <div className="d-flex min-vh-100 text-center justify-content-center flex-column">
+      <h2 className="gustavo-potter-header">Reri porte</h2>
       </div>
   )

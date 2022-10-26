@@ -1,13 +1,18 @@
+@import '~bootstrap/scss/_functions.scss';
+@import '~bootstrap/scss/_variables.scss';
+
 $themes: (
   light: (
-    colorHeaderFooter: #fff,
+    colorHeaderFooter: $light,
     colorText: #000,
     colorBackground: #f8f8fa,
+    colorBorder:  $card-border-color,
   ),
   dark: (
     colorHeaderFooter: #36394c,
     colorText: #eff2f7,
     colorBackground: #222736,
+    colorBorder: rgba(255, 255, 255, 0.1)
   ),
 );
 
