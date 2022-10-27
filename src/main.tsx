@@ -2,11 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import '../src/scss/styles.scss'
 import Personagens from './pages/Personagens'
 import Magias from './pages/Magias'
 import ErrorPage from './pages/Error'
 import Default from './pages/Default'
+
+import '../src/scss/styles.scss'
 
 const router = createBrowserRouter([
   {

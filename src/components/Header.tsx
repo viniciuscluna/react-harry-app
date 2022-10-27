@@ -37,7 +37,7 @@ export default () => {
                             type="checkbox"
                             name="checkbox"
                             onChange={handleThemeChange}
-                            checked={theme === 'light'}
+                            checked={theme === 'dark'}
                         />
                         <button type="button" className={`toggle-btn__input-label`} onClick={handleThemeChange}></button>
                     </div>
