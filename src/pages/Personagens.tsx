@@ -2,25 +2,28 @@ import { useState, useEffect } from 'react';
 import CardList from "../components/CardList"
 import PersonagemType from "../types/PersonagemType"
 import { getPersonagens } from '../services/apiService';
-import LoadingCard from '../components/LoadingCard';
 import './Personagens.scss';
+import useLoaderStore from '../stores/loaderStore';
 
 export default () => {
-  const [carregando, setCarregando] = useState<boolean>(true);
+
+  const setLoading = useLoaderStore((state) => state.setLoading);
+
   const [personagens, setPersonagens] = useState<PersonagemType[]>([]);
   const [personagensFiltrados, setPersonagensFiltrados] = useState<PersonagemType[]>(personagens);
 
   useEffect(() => {
     const fetchPersonagens = async () => {
+      setLoading(true);
       const result = await getPersonagens();
       setPersonagens(result);
       setPersonagensFiltrados(result);
-      setCarregando(false);
+      setLoading(false);
     }
 
     fetchPersonagens();
 
-  }, [getPersonagens]);
+  }, [getPersonagens, setLoading]);
 
 
   const changeSearch = (text: string) => {
@@ -40,7 +43,7 @@ export default () => {
           autoFocus={true}
           onChange={(e: React.FormEvent<HTMLInputElement>) => changeSearch(e.currentTarget.value)}></input>
       </div>
-      {carregando ? <LoadingCard /> : <CardList cards={personagensFiltrados} />}
+      <CardList cards={personagensFiltrados} />
     </div>
   )
 }

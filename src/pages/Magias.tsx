@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react"
 import { getMagias } from "../services/apiService";
+import useLoaderStore from "../stores/loaderStore";
 import MagiaType from "../types/MagiaType"
 
 export default () => {
   const [magias, setMagias] = useState<MagiaType[]>([]);
+  const setLoading = useLoaderStore((state) => state.setLoading);
 
   useEffect(() => {
     const fetchMagias = async () => {
+      setLoading(true);
       setMagias(await getMagias());
+      setLoading(false);
     }
 
     fetchMagias();

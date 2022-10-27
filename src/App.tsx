@@ -3,6 +3,8 @@ import { Outlet } from "react-router-dom";
 import { ThemeContext } from './contexts/theme-context';
 import Header from "./components/Header"
 import { useState } from "react";
+import useLoaderStore from "./stores/loaderStore";
+import LoadingCard from "./components/LoadingCard";
 
 const App = () => {
 
@@ -15,6 +17,7 @@ const App = () => {
   };
 
   const [theme, setTheme] = useState(getDefaultTheme());
+  const isLoading = useLoaderStore((state) => state.loading);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
@@ -22,6 +25,7 @@ const App = () => {
         <Header />
         <div className="container-fluid content-body ">
           <Outlet />
+          {isLoading && <LoadingCard />}
         </div>
       </div>
     </ThemeContext.Provider>
