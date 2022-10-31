@@ -1,11 +1,23 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import {
+    Collapse,
+    Navbar,
+    NavbarBrand,
+    NavbarToggler,
+    Nav,
+    NavItem,
+    Input,
+    FormGroup,
+} from 'reactstrap';
 import { ThemeContext } from "../contexts/theme-context";
 import './Header.scss';
 
 export default () => {
     const { theme, setTheme } = useContext(ThemeContext);
-  
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
+    const toggle = () => setIsOpen(!isOpen);
 
     const handleThemeChange = () => {
         const isCurrentDark = theme === 'dark';
@@ -14,36 +26,28 @@ export default () => {
     };
 
     return (
-        <nav className={`navbar navbar-expand-lg`}>
-            <div className="container-fluid">
-                <Link className="navbar-brand" to={'/'}>Harry Potter App</Link>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
+        <div>
+            <Navbar expand="lg" className="navbar-expand-lg">
+                <NavbarBrand tag={Link} to={'/'}>Harry Potter App</NavbarBrand>
+                <NavbarToggler onClick={toggle} />
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className="me-auto" navbar>
+                        <NavItem>
                             <NavLink className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} to={`/Personagens`}>Personagens</NavLink>
-                        </li>
-                        <li className="nav-item">
+                        </NavItem>
+                        <NavItem>
                             <NavLink className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} to={`/Magias`}>Magias</NavLink>
-                        </li>
-                    </ul>
-                </div>
-                <div className="toggle-btn-section">
-                    <div className={`toggle-checkbox m-vertical-auto`}>
-                        <input
-                            className="toggle-btn__input"
-                            type="checkbox"
-                            name="checkbox"
-                            onChange={handleThemeChange}
-                            checked={theme === 'dark'}
-                        />
-                        <button type="button" className={`toggle-btn__input-label`} onClick={handleThemeChange}></button>
+                        </NavItem>
+                    </Nav>
+                    <div className="toggle-btn-section">
+                            <FormGroup switch >
+                                <Input type="switch" onChange={handleThemeChange}
+                                    checked={theme === 'dark'} />
+                            </FormGroup>
                     </div>
-                </div>
-            </div>
-        </nav>
+                </Collapse>
+            </Navbar>
+        </div>
     )
 }
 

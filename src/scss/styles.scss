@@ -19,6 +19,7 @@
 
 
 h3,
+p,
 table {
     @include themify($themes) {
         color: themed('colorText');
