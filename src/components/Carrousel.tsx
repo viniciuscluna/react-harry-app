@@ -9,6 +9,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import { loremIpsum } from "lorem-ipsum";
 import ImageType from '../types/ImageType';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const createItem = (imageList: ImageType[]): ImageType => {
     return {
@@ -68,7 +69,12 @@ export default () => {
                 onExited={() => setAnimating(false)}
                 key={item.src}
             >
-                <img src={item.src} alt={item.altText} />
+                <LazyLoadImage
+                    alt={item.altText}
+                    src={item.src}
+                    effect="blur"
+                    className="card-img-top card-personagem"
+                />
                 <CarouselCaption
                     captionText={item.caption}
                     captionHeader={item.caption}
