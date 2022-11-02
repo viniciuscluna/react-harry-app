@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CardList from "../../components/CardList"
+import CardList from "../../components/cardList"
 import PersonagemType from "../../types/PersonagemType"
 import { getPersonagens } from '../../services/apiService';
 import useLoaderStore from '../../stores/loaderStore';

@@ -2,7 +2,7 @@ import { loremIpsum } from "lorem-ipsum";
 import { GetStaticProps } from "next";
 import React from "react";
 import { v4 as uuidv4 } from 'uuid';
-import Carousel from "../components/Carousel";
+import Carousel from "../components/carousel";
 import ImageType from "../types/ImageType";
 
 const createItem = (key: number): ImageType => {
