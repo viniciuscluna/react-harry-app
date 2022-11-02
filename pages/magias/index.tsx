@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
-import { getMagias } from "../services/apiService";
-import useLoaderStore from "../stores/loaderStore";
-import MagiaType from "../types/MagiaType"
+import React, { useEffect, useState } from "react"
+import { getMagias } from "../../services/apiService";
+import useLoaderStore from "../../stores/loaderStore";
+import MagiaType from "../../types/MagiaType"
 
 export default () => {
   const [magias, setMagias] = useState<MagiaType[]>([]);

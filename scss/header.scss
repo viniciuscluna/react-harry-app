@@ -7,10 +7,23 @@
     }
 
     .container-fluid {
-        a {
+        a.navbar-brand {
             @include themify($themes) {
                 color: themed('colorText');
             }
         }
+
+        a {
+            @include themify($themes) {
+                color: themed('colorLightText');
+            }
+        }
+
+        .nav-link.active {
+            @include themify($themes) {
+                color: themed('colorText');
+            }
+        }
+
     }
 }

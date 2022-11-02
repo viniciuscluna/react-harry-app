@@ -5,12 +5,14 @@ $themes: (
   light: (
     colorHeaderFooter: $light,
     colorText: #000,
+    colorLightText: rgb(145, 141, 141),
     colorBackground: #f8f8fa,
     colorBorder:  $card-border-color,
   ),
   dark: (
     colorHeaderFooter: #36394c,
     colorText: #eff2f7,
+    colorLightText: #8e8e8f,
     colorBackground: #222736,
     colorBorder: rgba(255, 255, 255, 0.1)
   ),

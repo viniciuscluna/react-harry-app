@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
     Carousel,
     CarouselItem,
@@ -6,49 +6,22 @@ import {
     CarouselIndicators,
     CarouselCaption,
 } from 'reactstrap';
-import { v4 as uuidv4 } from 'uuid';
-import { loremIpsum } from "lorem-ipsum";
 import ImageType from '../types/ImageType';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-const createItem = (imageList: ImageType[]): ImageType => {
-    return {
-        src: `https://picsum.photos/1200/500?random&t=${uuidv4()}`,
-        altText: loremIpsum(),
-        caption: loremIpsum(),
-        key: imageList.length + 1
-    };
+type Props = {
+    imageList: ImageType[];
 }
 
+export default function CarouselComponent({ imageList }: Props) {
 
-const defaultList: ImageType[] = [
-    createItem([]),
-    createItem([])
-];
-
-
-export default () => {
     const [activeIndex, setActiveIndex] = useState<number>(0);
     const [animating, setAnimating] = useState<boolean>(false);
-    const [imageList, setImageList] = useState<ImageType[]>(defaultList);
-
 
     const next = () => {
         if (animating) return;
         const nextIndex = activeIndex === imageList.length - 1 ? 0 : activeIndex + 1;
         setActiveIndex(nextIndex);
-        if (imageList.length <= 15) {
-            const currentList = [...imageList];
-            currentList.push(createItem(imageList));
-            setImageList(currentList);
-        }
-        else {
-            const restartList: ImageType[] = [];
-            restartList.push(createItem(restartList));
-            restartList.push(createItem(restartList));
-            setImageList(restartList);
-            setActiveIndex(0);
-        }
     };
 
     const previous = () => {
@@ -62,12 +35,13 @@ export default () => {
         setActiveIndex(newIndex);
     };
 
-    const slides = imageList.map((item) => {
+    const slides = imageList.map((item, index) => {
         return (
             <CarouselItem
+                id={index.toString()}
                 onExiting={() => setAnimating(true)}
                 onExited={() => setAnimating(false)}
-                key={item.src}
+                key={index}
             >
                 <LazyLoadImage
                     alt={item.altText}
