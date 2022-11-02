@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
-import CardList from "../components/CardList"
-import PersonagemType from "../types/PersonagemType"
-import { getPersonagens } from '../services/apiService';
-import './Personagens.scss';
-import useLoaderStore from '../stores/loaderStore';
+import React, { useState, useEffect } from 'react';
+import CardList from "../../components/CardList"
+import PersonagemType from "../../types/PersonagemType"
+import { getPersonagens } from '../../services/apiService';
+import useLoaderStore from '../../stores/loaderStore';
 
 export default () => {
 

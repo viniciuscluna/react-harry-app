@@ -1,5 +1,6 @@
+import React from "react";
 import PersonagemType from "../types/PersonagemType";
-import Card from "./Card";
+import Card from "./card";
 
 type Props = {
     cards: PersonagemType[]

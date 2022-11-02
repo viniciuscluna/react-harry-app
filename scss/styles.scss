@@ -1,6 +1,8 @@
 @import './theme-variables.scss';
 @import "~bootstrap/scss/bootstrap";
 @import 'react-lazy-load-image-component/src/effects/blur.css';
+@import './header.scss';
+@import './personagens.scss';
 
 .theme-dark {
     background-color: #222736;
