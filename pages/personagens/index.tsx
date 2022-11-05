@@ -1,20 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import CardList from "../../components/cardList"
-import PersonagemType from "../../types/PersonagemType"
 import { getPersonagens } from '../../services/apiService';
+import useCharacterStore from '../../stores/charactersStore';
 import useLoaderStore from '../../stores/loaderStore';
+import CharacterType from '../../types/api/CharacterType';
 
 export default () => {
 
   const setLoading = useLoaderStore((state) => state.setLoading);
 
-  const [personagens, setPersonagens] = useState<PersonagemType[]>([]);
-  const [personagensFiltrados, setPersonagensFiltrados] = useState<PersonagemType[]>(personagens);
+  const { setPersonagens, personagens } = useCharacterStore((state) => ({
+    setPersonagens: state.setPersonagens,
+    personagens: state.personagens
+  }));
+
+  const [personagensFiltrados, setPersonagensFiltrados] = useState<CharacterType[]>(personagens);
 
   useEffect(() => {
     const fetchPersonagens = async () => {
       setLoading(true);
       const result = await getPersonagens();
+      result.map((personagem) => {
+        if (personagem.image === '')
+          personagem.image = 'https://cdn-icons-png.flaticon.com/512/1077/1077114.png?w=360';
+        return personagem;
+      })
       setPersonagens(result);
       setPersonagensFiltrados(result);
       setLoading(false);
@@ -26,7 +36,7 @@ export default () => {
 
 
   const changeSearch = (text: string) => {
-    const filter = personagens.filter(f => f.nome.toUpperCase().includes(text.toUpperCase()));
+    const filter = personagens.filter(f => f.name.toUpperCase().includes(text.toUpperCase()));
     setPersonagensFiltrados(filter);
   }
 

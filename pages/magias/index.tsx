@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { getMagias } from "../../services/apiService";
 import useLoaderStore from "../../stores/loaderStore";
-import MagiaType from "../../types/MagiaType"
+import SpellType from "../../types/api/SpellType";
+;
 
 export default () => {
-  const [magias, setMagias] = useState<MagiaType[]>([]);
+  const [magias, setMagias] = useState<SpellType[]>([]);
   const setLoading = useLoaderStore((state) => state.setLoading);
 
   useEffect(() => {
@@ -33,8 +34,8 @@ export default () => {
           {magias.map((magia, index) =>
             <tr key={index}>
               <th scope="row">{index + 1}</th>
-              <td>{magia.nome}</td>
-              <td>{magia.descricao}</td>
+              <td>{magia.name}</td>
+              <td>{magia.description}</td>
             </tr>
           )}
 

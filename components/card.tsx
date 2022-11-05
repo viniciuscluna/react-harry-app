@@ -1,21 +1,33 @@
+import Link from 'next/link';
 import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import PersonagemType from "../types/PersonagemType";
+import { Badge, Button } from 'reactstrap';
+import CharacterType from '../types/api/CharacterType';
 
 const cardStyle: React.CSSProperties = { width: '18rem' };
 
-export default (card: PersonagemType) => (
+export default (card: CharacterType) => (
   <div className="card col-2" style={cardStyle}>
     <LazyLoadImage
-      alt={card.nome}
-      src={card.foto}
+      alt={card.name}
+      src={card.image}
       effect="blur"
       className="card-img-top card-personagem"
     />
     <div className="card-body">
-      <h5 className="card-title">{card.nome}</h5>
-      <p className="card-text">{card.raca}</p>
-      {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
+      <h5 className="card-title">{card.name}</h5>
+      <p className="card-text">{card.species}
+        {card.wizard ?
+          <Badge className='float-end'
+            color="primary"
+            pill
+          >
+            Bruxo
+          </Badge> : <></>}
+      </p>
+      <Button outline block tag={Link} href={`/personagens/${card.name}`}>
+        Veja Mais...
+      </Button>
     </div>
   </div>
 )

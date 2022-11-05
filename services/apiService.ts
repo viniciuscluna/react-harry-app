@@ -1,18 +1,24 @@
 import axios from 'axios';
-import CharacterType from '../types/CharacterType';
-import MagiaType from '../types/MagiaType';
-import PersonagemType from '../types/PersonagemType';
-import SpellType from '../types/SpellType';
-import { characterToPersonagem, spellToMagia } from '../utils/mapper';
+import CharacterType from '../types/api/CharacterType';
+import SpellType from '../types/api/SpellType';
 
-export const getPersonagens = async (): Promise<PersonagemType[]> => {
+export const getPersonagens = async (): Promise<CharacterType[]> => {
     const url = 'https://hp-api.herokuapp.com/api/characters';
     const result = await axios.get<CharacterType[]>(url);
-    return characterToPersonagem(result.data).filter((f: PersonagemType)  => f.foto);
+    return result.data;
 }
 
-export const getMagias = async (): Promise<MagiaType[]> => {
+export const getMagias = async (): Promise<SpellType[]> => {
     const url = 'https://hp-api.herokuapp.com/api/spells';
     const result = await axios.get<SpellType[]>(url);
-    return spellToMagia(result.data);
-} 
+    return result.data;
+}
+
+export const getPersonagensByHouse = async (house: string): Promise<CharacterType[]> => {
+    const url = `https://hp-api.herokuapp.com/api/characters/house/${house}`;
+    try {
+        const result = await axios.get<CharacterType[]>(url);
+        return result.data;
+    }
+    catch { return []; }
+}
