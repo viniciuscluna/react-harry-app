@@ -10,7 +10,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 
   useEffect(() => {
-
+    
     const isBrowserDefaultDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     const getDefaultTheme = (): string => {

@@ -1,32 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import CardList from "../../components/cardList"
 import { getPersonagens } from '../../services/apiService';
 import useCharacterStore from '../../stores/charactersStore';
-import useLoaderStore from '../../stores/loaderStore';
 import CharacterType from '../../types/api/CharacterType';
 
-export default () => {
 
-  const [_, setLoading] = useRecoilState(useLoaderStore);
+export async function getServerSideProps({ req, res }) {
 
-  const [personagens, setPersonagens] = useRecoilState(useCharacterStore);
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
 
+  // Fetch data from external API
+  const personagens = (await getPersonagens()).filter(f => f.image)
+
+
+  // Pass data to the page via props
+  return { props: { personagens } }
+}
+
+
+function Page({ personagens }) {
+  const [__, setPersonagens] = useRecoilState(useCharacterStore);
+
+  setPersonagens(personagens);
+  
   const [personagensFiltrados, setPersonagensFiltrados] = useState<CharacterType[]>(personagens);
-
-  useEffect(() => {
-    const fetchPersonagens = async () => {
-      setLoading(true);
-      const result = (await getPersonagens()).filter(f => f.image);
-      setPersonagens(result);
-      setPersonagensFiltrados(result);
-      setLoading(false);
-    }
-
-    fetchPersonagens();
-
-  }, [getPersonagens, setLoading]);
-
 
   const changeSearch = (text: string) => {
     const filter = personagens.filter(f => f.name.toUpperCase().includes(text.toUpperCase()));
@@ -50,3 +51,4 @@ export default () => {
   )
 }
 
+export default Page;

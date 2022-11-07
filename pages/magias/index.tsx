@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from "react"
-import { useRecoilState } from "recoil";
+import React from "react"
 import { getMagias } from "../../services/apiService";
-import useLoaderStore from "../../stores/loaderStore";
-import SpellType from "../../types/api/SpellType";
-;
 
-export default () => {
-  const [magias, setMagias] = useState<SpellType[]>([]);
-  const [_, setLoading] = useRecoilState(useLoaderStore);
+export async function getServerSideProps({ req, res }) {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
 
-  useEffect(() => {
-    const fetchMagias = async () => {
-      setLoading(true);
-      setMagias(await getMagias());
-      setLoading(false);
-    }
+  // Fetch data from external API
+  const magias = await getMagias();
 
-    fetchMagias();
 
-  }, [getMagias]);
+  // Pass data to the page via props
+  return { props: { magias } }
+}
+
+
+function App ({ magias }) {
 
   return (
     <div className=" mx-3 p-2 row">
@@ -46,3 +44,5 @@ export default () => {
   )
 
 }
+
+export default App;
