@@ -1,17 +1,15 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Badge, Card, CardBody, CardImg, CardSubtitle, CardTitle, Col, Input, ListGroup, ListGroupItem, Row, Spinner, Table } from "reactstrap";
-import { BsGenderMale, BsFillPersonFill } from 'react-icons/bs';
-import { BiCake } from 'react-icons/bi';
-import { GiWizardFace } from 'react-icons/gi';
-import { ImMagicWand } from 'react-icons/im';
+import { IconWand, IconUser, IconGenderMale, IconGift, IconAspectRatio, IconWood, IconBolt, IconHomePlus, IconChefHat } from '@tabler/icons';
 import useCharacterStore from "../../../stores/charactersStore";
 import CharacterType from "../../../types/api/CharacterType";
 import { getPersonagensByHouse } from "../../../services/apiService";
+import { useRecoilValue } from "recoil";
 
-const tableStyle : React.CSSProperties = {
-    maxHeight: '90vh'
-} 
+const tableStyle: React.CSSProperties = {
+    maxHeight: '80vh'
+}
 
 
 const dummyPersonagem: CharacterType = {
@@ -39,12 +37,9 @@ export default () => {
     const [personagensHouse, setPersonagensHouse] = useState<CharacterType[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
+    const characters = useRecoilValue(useCharacterStore);
 
-
-    const getByName = useCharacterStore((state) => state.getByName);
-
-
-    const personagem = getByName(namePersonagem) || dummyPersonagem;
+    const personagem = characters.find(f => f.name === namePersonagem) || dummyPersonagem;
 
 
     useEffect(() => {
@@ -71,19 +66,19 @@ export default () => {
                                             color="primary"
                                             pill
                                         >
-                                            <GiWizardFace className="mb-1" />   Bruxo
+                                            <IconChefHat className="mb-1" />   Bruxo
                                         </Badge> : <></>}
                                 </Col>
                                 <Row className="ms-1">
                                     <ListGroup flush >
                                         <ListGroupItem>
-                                            <BsGenderMale className="mb-1" />  <strong>Gender: </strong>{personagem.gender}
+                                            <IconGenderMale className="mb-1" />  <strong>Gender: </strong>{personagem.gender}
                                         </ListGroupItem>
                                         <ListGroupItem>
-                                            <BiCake className="mb-1 " /> <strong>Date of birth :</strong> {personagem.dateOfBirth.toString()}
+                                            <IconGift className="mb-1 " /> <strong>Date of birth :</strong> {personagem.dateOfBirth.toString()}
                                         </ListGroupItem>
                                         <ListGroupItem>
-                                            <BsFillPersonFill className="mb-1" /> <strong> Actor :</strong>  {personagem.actor}
+                                            <IconUser className="mb-1" /> <strong> Actor :</strong>  {personagem.actor}
                                         </ListGroupItem>
                                     </ListGroup>
                                 </Row>
@@ -95,18 +90,18 @@ export default () => {
                 <Col lg={4}>
                     <Card>
                         <CardBody>
-                            <CardTitle tag="h4"><ImMagicWand className="mb-2" /> Use a Varinha Harry</CardTitle>
+                            <CardTitle tag="h4"><IconWand className="mb-2" /> Use a Varinha Harry</CardTitle>
                             <CardSubtitle className="mb-2">Wand description :</CardSubtitle>
                             <Row >
                                 <ListGroup flush >
                                     <ListGroupItem>
-                                        <BsGenderMale className="mb-1" />  <strong>Core: </strong> {personagem.wand.core}
+                                        <IconBolt className="mb-1" />  <strong>Core: </strong> {personagem.wand.core}
                                     </ListGroupItem>
                                     <ListGroupItem>
-                                        <BiCake className="mb-1 " /> <strong>Wood :</strong>  {personagem.wand.wood}
+                                        <IconWood className="mb-1 " /> <strong>Wood :</strong>  {personagem.wand.wood}
                                     </ListGroupItem>
                                     <ListGroupItem>
-                                        <BsFillPersonFill className="mb-1" /> <strong>Length :</strong> {personagem.wand.length}
+                                        <IconAspectRatio className="mb-1" /> <strong>Length :</strong> {personagem.wand.length}
                                     </ListGroupItem>
                                 </ListGroup>
                             </Row>
@@ -115,52 +110,60 @@ export default () => {
                 </Col>
 
                 <Col lg={4} >
-                    <div className="overflow-auto" style={tableStyle}>
-                        {isLoading ?
-                            <Spinner>
-                                Carregando...
-                            </Spinner>
-                            :
-                            <Table
-                            >
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            #
-                                        </th>
-                                        <th>
-                                            Nome
-                                        </th>
-                                        <th>
-                                            Tipo
-                                        </th>
-                                        <th>
-                                            Bruxo?
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {personagensHouse && personagensHouse.map((personagem, index) => (
-                                        <tr key={index}>
-                                            <th scope="row">
-                                                {index + 1}
-                                            </th>
-                                            <td>
-                                                {personagem.name}
-                                            </td>
-                                            <td>
-                                                {personagem.gender}
-                                            </td>
-                                            <td>
-                                                <Input type="checkbox" checked={personagem.wizard} disabled={true} />
-                                            </td>
-                                        </tr>
-                                    ))}
+                    <Card>
+                        <CardBody>
+                            <CardTitle tag="h4"><IconHomePlus className="mb-2" /> Integrantes da casa {personagem.house}</CardTitle>
+                            <Row >
+                                <div className="overflow-auto" style={tableStyle}>
+                                    {isLoading ?
+                                        <Spinner>
+                                            Carregando...
+                                        </Spinner>
+                                        :
+                                        <Table dark
+                                        >
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        #
+                                                    </th>
+                                                    <th>
+                                                        Nome
+                                                    </th>
+                                                    <th>
+                                                        Tipo
+                                                    </th>
+                                                    <th>
+                                                        Bruxo?
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {personagensHouse && personagensHouse.map((personagem, index) => (
+                                                    <tr key={index}>
+                                                        <th scope="row">
+                                                            {index + 1}
+                                                        </th>
+                                                        <td>
+                                                            {personagem.name}
+                                                        </td>
+                                                        <td>
+                                                            {personagem.gender}
+                                                        </td>
+                                                        <td>
+                                                            <Input type="checkbox" checked={personagem.wizard} disabled={true} />
+                                                        </td>
+                                                    </tr>
+                                                ))}
 
-                                </tbody>
-                            </Table>
-                        }
-                    </div>
+                                            </tbody>
+                                        </Table>
+                                    }
+                                </div>
+                            </Row>
+                        </CardBody>
+                    </Card>
+
                 </Col>
             </Row>
         </div>

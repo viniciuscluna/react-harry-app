@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 import CardList from "../../components/cardList"
 import { getPersonagens } from '../../services/apiService';
 import useCharacterStore from '../../stores/charactersStore';
@@ -7,24 +8,16 @@ import CharacterType from '../../types/api/CharacterType';
 
 export default () => {
 
-  const setLoading = useLoaderStore((state) => state.setLoading);
+  const [_, setLoading] = useRecoilState(useLoaderStore);
 
-  const { setPersonagens, personagens } = useCharacterStore((state) => ({
-    setPersonagens: state.setPersonagens,
-    personagens: state.personagens
-  }));
+  const [personagens, setPersonagens] = useRecoilState(useCharacterStore);
 
   const [personagensFiltrados, setPersonagensFiltrados] = useState<CharacterType[]>(personagens);
 
   useEffect(() => {
     const fetchPersonagens = async () => {
       setLoading(true);
-      const result = await getPersonagens();
-      result.map((personagem) => {
-        if (personagem.image === '')
-          personagem.image = 'https://cdn-icons-png.flaticon.com/512/1077/1077114.png?w=360';
-        return personagem;
-      })
+      const result = (await getPersonagens()).filter(f => f.image);
       setPersonagens(result);
       setPersonagensFiltrados(result);
       setLoading(false);

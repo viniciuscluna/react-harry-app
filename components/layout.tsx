@@ -3,6 +3,7 @@ import { ThemeContext } from '../contexts/theme-context';
 import Header from "./header"
 import useLoaderStore from "../stores/loaderStore";
 import LoadingCard from "./loadingCard";
+import { useRecoilValue } from "recoil";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<string>('dark');
@@ -27,7 +28,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 
 
-  const isLoading = useLoaderStore((state) => state.loading);
+  const isLoading = useRecoilValue(useLoaderStore);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>

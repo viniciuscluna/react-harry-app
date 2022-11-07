@@ -1,9 +1,10 @@
-import create from 'zustand'
-import LoaderStore from '../types/store/LoaderStore';
 
-const useLoaderStore = create<LoaderStore>((set) => ({
-  loading: false,
-  setLoading: (isLoading: boolean) => set(() => ({ loading: isLoading }))
-}))
+import { atom } from 'recoil';
+
+
+const useLoaderStore = atom<boolean>({
+  key:'loaderStoreKey',
+  default: false
+})
 
 export default useLoaderStore;

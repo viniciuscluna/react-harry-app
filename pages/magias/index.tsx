@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { useRecoilState } from "recoil";
 import { getMagias } from "../../services/apiService";
 import useLoaderStore from "../../stores/loaderStore";
 import SpellType from "../../types/api/SpellType";
@@ -6,7 +7,7 @@ import SpellType from "../../types/api/SpellType";
 
 export default () => {
   const [magias, setMagias] = useState<SpellType[]>([]);
-  const setLoading = useLoaderStore((state) => state.setLoading);
+  const [_, setLoading] = useRecoilState(useLoaderStore);
 
   useEffect(() => {
     const fetchMagias = async () => {
