@@ -1,54 +1,39 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Badge, Card, CardBody, CardImg, CardSubtitle, CardTitle, Col, Input, ListGroup, ListGroupItem, Row, Spinner, Table } from "reactstrap";
 import { IconWand, IconUser, IconGenderMale, IconGift, IconAspectRatio, IconWood, IconBolt, IconHomePlus, IconChefHat } from '@tabler/icons';
-import useCharacterStore from "../../../stores/charactersStore";
 import CharacterType from "../../../types/api/CharacterType";
 import { getPersonagensByHouse } from "../../../services/apiService";
-import { useRecoilValue } from "recoil";
+import { useSessionStorage } from "usehooks-ts";
+import { CHARACTER_LIST_KEY } from "../../../utils/constants";
 
 const tableStyle: React.CSSProperties = {
     maxHeight: '80vh'
 }
 
 
-const dummyPersonagem: CharacterType = {
-    name: "Harry Potter",
-    species: "human",
-    gender: "male",
-    house: "Gryffindor",
-    dateOfBirth: new Date("1980-07-31"),
-    yearOfBirth: 1980,
-    wizard: true,
-    wand: {
-        wood: "holly",
-        core: "phoenix feather",
-        length: 11
-    },
-    hogwartsStudent: true,
-    hogwartsStaff: false,
-    actor: "Daniel Radcliffe",
-    image: "https://hp-api.herokuapp.com/images/harry.jpg"
-};
 
 export default () => {
     const router = useRouter();
     const namePersonagem = router.query.personagem as string;
     const [personagensHouse, setPersonagensHouse] = useState<CharacterType[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [characters, __] = useSessionStorage<CharacterType[]>(CHARACTER_LIST_KEY, []);
 
-    const characters = useRecoilValue(useCharacterStore);
-
-    const personagem = characters.find(f => f.name === namePersonagem) || dummyPersonagem;
-
+    const personagem = useMemo(() => characters.find(f => f.name === namePersonagem), [namePersonagem]); 
 
     useEffect(() => {
-        const fetchPersonagens = async () => {
-            setPersonagensHouse(await getPersonagensByHouse(personagem.house));
-            setIsLoading(false);
+        if (personagem) {
+            const fetchPersonagens = async () => {
+                setPersonagensHouse(await getPersonagensByHouse(personagem.house || ''));
+                setIsLoading(false);
+            };
+            fetchPersonagens();
         }
-        fetchPersonagens();
-    }, [])
+    }, [personagem]);
+
+    if (!personagem)
+        return (<></>);
 
     return (
         <div className="container-fluid my-4 ">

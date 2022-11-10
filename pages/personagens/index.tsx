@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useRecoilState } from 'recoil';
+import React, { useEffect, useState } from 'react';
+import { useSessionStorage } from 'usehooks-ts'
 import CardList from "../../components/cardList"
 import { getPersonagens } from '../../services/apiService';
-import useCharacterStore from '../../stores/charactersStore';
 import CharacterType from '../../types/api/CharacterType';
+import { CHARACTER_LIST_KEY } from '../../utils/constants';
 
 
 export async function getServerSideProps({ req, res }) {
@@ -23,9 +23,12 @@ export async function getServerSideProps({ req, res }) {
 
 
 function Page({ personagens }) {
-  const [__, setPersonagens] = useRecoilState(useCharacterStore);
+  const [__, setPersonagens] = useSessionStorage(CHARACTER_LIST_KEY, []);
 
-  setPersonagens(personagens);
+  useEffect(() => {
+    setPersonagens(personagens);
+  }, personagens)
+  
   
   const [personagensFiltrados, setPersonagensFiltrados] = useState<CharacterType[]>(personagens);
 
