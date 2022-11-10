@@ -3,8 +3,13 @@ import Layout from '../components/layout'
 import Head from 'next/head';
 import '../scss/styles.scss';
 import { RecoilRoot } from 'recoil';
+import { useLoaderRouter } from '../hooks/LoaderHook';
+import LoadingCard from '../components/loadingCard';
 
 export default function App({ Component, pageProps }) {
+
+    const isLoading = useLoaderRouter();
+
     return (
         <>
             <RecoilRoot>
@@ -14,7 +19,9 @@ export default function App({ Component, pageProps }) {
                     <title>Harry Potter App</title>
                 </Head>
                 <Layout>
-                    <Component {...pageProps} />
+                    {isLoading ? <LoadingCard /> :
+                        <Component {...pageProps} />
+                    }
                 </Layout>
             </RecoilRoot>
         </>

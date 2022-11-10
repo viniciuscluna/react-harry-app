@@ -30,7 +30,7 @@ export default () => {
     const { theme } = useContext(ThemeContext);
     const isDark = theme === 'dark';
     return (
-        <div className="row mx-2 d-flex justify-content-around gy-4">
+        <div className="row mx-2 d-flex justify-content-around gy-4 mt-5">
             <PlaceholderCard isDark={isDark} />
             <PlaceholderCard isDark={isDark} />
             <PlaceholderCard isDark={isDark} />
