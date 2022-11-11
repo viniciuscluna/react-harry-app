@@ -26,7 +26,7 @@ const PlaceholderCard = ({ isDark }: Props) => {
     )
 }
 
-export default () => {
+const LoadingCard = () => {
     const { theme } = useContext(ThemeContext);
     const isDark = theme === 'dark';
     return (
@@ -44,3 +44,5 @@ export default () => {
         </div>
     )
 }
+
+export default LoadingCard;

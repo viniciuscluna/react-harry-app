@@ -1,12 +1,12 @@
 import React from "react";
-import CharacterType from "../types/api/CharacterType";
+import CharacterType from "../types/api/characterType";
 import Card from "./card";
 
 type Props = {
     cards: CharacterType[]
 }
 
-export default  ({cards}: Props) => 
+const CardList = ({cards}: Props) => 
 {
     return (
         <div className="row d-flex justify-content-around gy-4">
@@ -16,3 +16,5 @@ export default  ({cards}: Props) =>
         </div>
     )
 }
+
+export default CardList;

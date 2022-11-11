@@ -14,7 +14,7 @@ import {
 } from 'reactstrap';
 import { ThemeContext } from "../contexts/theme-context";
 
-export default () => {
+const Header = () => {
     const { theme, setTheme } = useContext(ThemeContext);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const router = useRouter();
@@ -55,3 +55,4 @@ export default () => {
     )
 }
 
+export default Header

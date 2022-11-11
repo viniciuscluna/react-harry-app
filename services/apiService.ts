@@ -1,6 +1,6 @@
 import axios from 'axios';
-import CharacterType from '../types/api/CharacterType';
-import SpellType from '../types/api/SpellType';
+import CharacterType from '../types/api/characterType';
+import SpellType from '../types/api/spellType';
 
 export const getPersonagens = async (): Promise<CharacterType[]> => {
     const url = 'https://hp-api.herokuapp.com/api/characters';

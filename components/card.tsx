@@ -2,11 +2,11 @@ import Link from 'next/link';
 import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Badge, Button } from 'reactstrap';
-import CharacterType from '../types/api/CharacterType';
+import CharacterType from '../types/api/characterType';
 
 const cardStyle: React.CSSProperties = { width: '18rem' };
 
-export default (card: CharacterType) => (
+const Card = (card: CharacterType) => (
   <div className="card col-2" style={cardStyle}>
     <LazyLoadImage
       alt={card.name}
@@ -32,3 +32,4 @@ export default (card: CharacterType) => (
   </div>
 )
 
+export default Card;

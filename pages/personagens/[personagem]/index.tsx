@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
 import { Badge, Card, CardBody, CardImg, CardSubtitle, CardTitle, Col, Input, ListGroup, ListGroupItem, Row, Spinner, Table } from "reactstrap";
 import { IconWand, IconUser, IconGenderMale, IconGift, IconAspectRatio, IconWood, IconBolt, IconHomePlus, IconChefHat } from '@tabler/icons';
-import CharacterType from "../../../types/api/CharacterType";
+import CharacterType from "../../../types/api/characterType";
 import { getPersonagensByHouse } from "../../../services/apiService";
 import { useSessionStorage } from "usehooks-ts";
 import { CHARACTER_LIST_KEY } from "../../../utils/constants";
@@ -11,16 +11,14 @@ const tableStyle: React.CSSProperties = {
     maxHeight: '80vh'
 }
 
-
-
-export default () => {
+const IndexPersonagens = () => {
     const router = useRouter();
     const namePersonagem = router.query.personagem as string;
     const [personagensHouse, setPersonagensHouse] = useState<CharacterType[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [characters, __] = useSessionStorage<CharacterType[]>(CHARACTER_LIST_KEY, []);
 
-    const personagem = useMemo(() => characters.find(f => f.name === namePersonagem), [namePersonagem]); 
+    const personagem = useMemo(() => characters.find(f => f.name === namePersonagem), [characters, namePersonagem]); 
 
     useEffect(() => {
         if (personagem) {
@@ -154,3 +152,5 @@ export default () => {
         </div>
     )
 }
+
+export default IndexPersonagens;

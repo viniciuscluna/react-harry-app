@@ -1,8 +1,11 @@
+import { GetServerSideProps } from "next";
 import React from "react"
 import { getMagias } from "../../services/apiService";
+import SpellType from "../../types/api/spellType";
 
-export async function getServerSideProps({ req, res }) {
-  res.setHeader(
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  context.res.setHeader(
     'Cache-Control',
     'public, s-maxage=10, stale-while-revalidate=59'
   );
@@ -15,9 +18,11 @@ export async function getServerSideProps({ req, res }) {
   return { props: { magias } }
 }
 
+interface MagiasProp {
+  magias: SpellType[];
+}
 
-function App ({ magias }) {
-
+const App = ({ magias }: MagiasProp) => {
   return (
     <div className=" mx-3 p-2 row">
       <h3 className='my-4'>Magias</h3>

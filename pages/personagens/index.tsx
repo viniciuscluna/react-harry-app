@@ -1,14 +1,14 @@
+import { GetServerSideProps } from 'next';
 import React, { useEffect, useState } from 'react';
 import { useSessionStorage } from 'usehooks-ts'
 import CardList from "../../components/cardList"
 import { getPersonagens } from '../../services/apiService';
-import CharacterType from '../../types/api/CharacterType';
+import CharacterType from '../../types/api/characterType';
 import { CHARACTER_LIST_KEY } from '../../utils/constants';
 
 
-export async function getServerSideProps({ req, res }) {
-
-  res.setHeader(
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  context.res.setHeader(
     'Cache-Control',
     'public, s-maxage=10, stale-while-revalidate=59'
   );
@@ -16,19 +16,21 @@ export async function getServerSideProps({ req, res }) {
   // Fetch data from external API
   const personagens = (await getPersonagens()).filter(f => f.image)
 
-
   // Pass data to the page via props
   return { props: { personagens } }
 }
 
+interface PersonagensProp {
+  personagens: CharacterType[];
+}
 
-function Page({ personagens }) {
-  const [__, setPersonagens] = useSessionStorage(CHARACTER_LIST_KEY, []);
+const Page = ({ personagens }: PersonagensProp) => {
+  const [__, setPersonagens] = useSessionStorage<CharacterType[]>(CHARACTER_LIST_KEY, []);
   const [personagensFiltrados, setPersonagensFiltrados] = useState<CharacterType[]>(personagens);
 
   useEffect(() => {
     setPersonagens(personagens);
-  }, [personagens]);
+  }, [personagens, setPersonagens]);
 
   const changeSearch = (text: string) => {
     const filter = personagens.filter(f => f.name.toUpperCase().includes(text.toUpperCase()));

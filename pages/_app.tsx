@@ -1,11 +1,12 @@
 import React from 'react'
 import Layout from '../components/layout'
 import Head from 'next/head';
-import { useLoaderRouter } from '../hooks/LoaderHook';
+import { useLoaderRouter } from '../hooks/loaderHook';
 import LoadingCard from '../components/loadingCard';
+import { AppProps } from 'next/app';
 import '../scss/styles.scss';
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }: AppProps) {
 
     const isLoading = useLoaderRouter();
 

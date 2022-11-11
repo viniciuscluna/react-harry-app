@@ -3,7 +3,7 @@ import { GetStaticProps } from "next";
 import React from "react";
 import { v4 as uuidv4 } from 'uuid';
 import Carousel from "../components/carousel";
-import ImageType from "../types/ImageType";
+import ImageType from "../types/imageType";
 
 const createItem = (key: number): ImageType => {
   return {
@@ -30,10 +30,15 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-export default ({ imageList }) => (
+interface IndexProps {
+  imageList: ImageType[];
+}
+
+const Index = ({ imageList }: IndexProps) => (
   <div className="d-flex min-vh-100 text-center justify-content-center flex-column">
     <h2 className="gustavo-potter-header pb-2">Reri porte</h2>
     <Carousel imageList={imageList} />
   </div>
 )
 
+export default Index;
