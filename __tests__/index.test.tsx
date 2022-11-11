@@ -1,7 +1,8 @@
-import { render, screen } from '@testing-library/react'
-import Index from './index'
-import '@testing-library/jest-dom'
-import ImageType from '../types/imageType'
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import Index from '../pages/index';
+import '@testing-library/jest-dom';
+import ImageType from '../types/imageType';
 
 describe('Home', () => {
     it('renders a h2', () => {
@@ -12,4 +13,4 @@ describe('Home', () => {
 
         expect(h2).toBeInTheDocument();
     })
-})
+});
