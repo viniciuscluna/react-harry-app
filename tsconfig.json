@@ -30,7 +30,7 @@
     ]
   },
   "include": [
-    "src",
+    "pages",
     ".next/types/**/*.ts"
   ],
   "exclude": [
