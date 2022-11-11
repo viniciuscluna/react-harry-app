@@ -24,13 +24,11 @@ export async function getServerSideProps({ req, res }) {
 
 function Page({ personagens }) {
   const [__, setPersonagens] = useSessionStorage(CHARACTER_LIST_KEY, []);
+  const [personagensFiltrados, setPersonagensFiltrados] = useState<CharacterType[]>(personagens);
 
   useEffect(() => {
     setPersonagens(personagens);
-  }, personagens)
-  
-  
-  const [personagensFiltrados, setPersonagensFiltrados] = useState<CharacterType[]>(personagens);
+  }, [personagens]);
 
   const changeSearch = (text: string) => {
     const filter = personagens.filter(f => f.name.toUpperCase().includes(text.toUpperCase()));
