@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Index from '../../pages/index';
+import Index from '../../src/pages/index';
 import '@testing-library/jest-dom';
-import ImageType from '../../types/imageType';
+import ImageType from '../../src/types/imageType';
 
 describe('Home', () => {
     it('renders a h2', () => {

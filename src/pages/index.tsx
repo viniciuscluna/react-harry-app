@@ -3,7 +3,7 @@ import { GetStaticProps } from "next";
 import React from "react";
 import { v4 as uuidv4 } from 'uuid';
 import Carousel from "../components/carousel";
-import ImageType from "../types/imageType";
+import ImageType from "../src/types/imageType";
 
 const createItem = (key: number): ImageType => {
   return {

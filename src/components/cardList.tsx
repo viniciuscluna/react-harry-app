@@ -1,5 +1,5 @@
 import React from "react";
-import CharacterType from "../types/api/characterType";
+import CharacterType from "../src/types/api/characterType";
 import Card from "./card";
 
 type Props = {

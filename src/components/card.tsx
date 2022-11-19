@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Badge, Button } from 'reactstrap';
-import CharacterType from '../types/api/characterType';
+import CharacterType from '../src/types/api/characterType';
 
 const cardStyle: React.CSSProperties = { width: '18rem' };
 

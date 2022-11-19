@@ -4,8 +4,8 @@ import { Badge, Card, CardBody, CardImg, CardSubtitle, CardTitle, Col, Input, Li
 import { IconWand, IconUser, IconGenderMale, IconGift, IconAspectRatio, IconWood, IconBolt, IconHomePlus, IconChefHat } from '@tabler/icons';
 import CharacterType from "../../../types/api/characterType";
 import { getPersonagensByHouse } from "../../../services/apiService";
-import { useSessionStorage } from "usehooks-ts";
 import { CHARACTER_LIST_KEY } from "../../../utils/constants";
+import { useSessionStorage } from "usehooks-ts";
 
 const tableStyle: React.CSSProperties = {
     maxHeight: '80vh'

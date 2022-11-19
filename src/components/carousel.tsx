@@ -6,7 +6,7 @@ import {
     CarouselIndicators,
     CarouselCaption,
 } from 'reactstrap';
-import ImageType from '../types/imageType';
+import ImageType from '../src/types/imageType';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 type Props = {
