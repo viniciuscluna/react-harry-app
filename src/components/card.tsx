@@ -1,17 +1,21 @@
 import Link from 'next/link';
 import React from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Image from 'next/image';
 import { Badge, Button } from 'reactstrap';
-import CharacterType from '../src/types/api/characterType';
+import CharacterType from '../types/api/characterType';
+import shimmer from '../utils/shimmer';
 
 const cardStyle: React.CSSProperties = { width: '18rem' };
 
 const Card = (card: CharacterType) => (
   <div className="card col-2" style={cardStyle}>
-    <LazyLoadImage
+    <Image
       alt={card.name}
       src={card.image}
-      effect="blur"
+      placeholder="blur"
+      blurDataURL={`data:image/svg+xml;base64,${shimmer(600, 400)}`}
+      width={600}
+      height={400}
       className="card-img-top card-personagem"
     />
     <div className="card-body">

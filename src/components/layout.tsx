@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { ThemeContext } from '../contexts/theme-context';
 import Header from "./header"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<string>('dark');
-
+  const queryClient = new QueryClient()
 
   useEffect(() => {
-    
+
     const isBrowserDefaultDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     const getDefaultTheme = (): string => {
@@ -25,12 +26,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div className={`theme-${theme} min-vh-100`}>
-        <Header />
-        <div className="container-fluid content-body ">
-          {children}
+      <QueryClientProvider client={queryClient}>
+        <div className={`theme-${theme} min-vh-100`}>
+          <Header />
+          <div className="container-fluid content-body ">
+            {children}
+          </div>
         </div>
-      </div>
+      </QueryClientProvider>
     </ThemeContext.Provider>
   )
 }

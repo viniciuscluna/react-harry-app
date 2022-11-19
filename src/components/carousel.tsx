@@ -6,12 +6,16 @@ import {
     CarouselIndicators,
     CarouselCaption,
 } from 'reactstrap';
-import ImageType from '../src/types/imageType';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Image from 'next/image';
+import ImageType from '../types/imageType';
+import shimmer from '../utils/shimmer';
 
 type Props = {
     imageList: ImageType[];
 }
+
+
+    
 
 export default function CarouselComponent({ imageList }: Props) {
 
@@ -43,15 +47,20 @@ export default function CarouselComponent({ imageList }: Props) {
                 onExited={() => setAnimating(false)}
                 key={index}
             >
-                <LazyLoadImage
+
+                <Image
                     alt={item.altText}
                     src={item.src}
-                    effect="blur"
+                    placeholder="blur"
+                    blurDataURL={`data:image/svg+xml;base64,${shimmer(700, 475)}`}
+                    width={1200}
+                    height={600}
+
                     className="card-img-top card-personagem"
                 />
                 <CarouselCaption
                     captionText={item.caption}
-                    captionHeader={item.caption}
+                    captionHeader={item.altText}
                 />
             </CarouselItem>
         );

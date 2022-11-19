@@ -14,11 +14,8 @@ export const getMagias = async (): Promise<SpellType[]> => {
     return result.data;
 }
 
-export const getPersonagensByHouse = async (house: string): Promise<CharacterType[]> => {
+export const fetchPersonagensByHouse = async (house?: string): Promise<CharacterType[]> => {
+    if(!house) return [];
     const url = `https://hp-api.herokuapp.com/api/characters/house/${house}`;
-    try {
-        const result = await axios.get<CharacterType[]>(url);
-        return result.data;
-    }
-    catch { return []; }
+    return (await axios.get<CharacterType[]>(url)).data;
 }

@@ -1,15 +1,14 @@
-import { loremIpsum } from "lorem-ipsum";
+import { faker } from '@faker-js/faker';
 import { GetStaticProps } from "next";
 import React from "react";
-import { v4 as uuidv4 } from 'uuid';
 import Carousel from "../components/carousel";
-import ImageType from "../src/types/imageType";
+import ImageType from "../types/imageType";
 
 const createItem = (key: number): ImageType => {
   return {
-    src: `https://picsum.photos/1200/500?random&t=${uuidv4()}`,
-    altText: loremIpsum(),
-    caption: loremIpsum(),
+    src: `https://picsum.photos/1200/500?random&t=${faker.datatype.uuid()}`,
+    altText: faker.random.words(2),
+    caption: faker.random.words(5),
     key: key
   };
 }

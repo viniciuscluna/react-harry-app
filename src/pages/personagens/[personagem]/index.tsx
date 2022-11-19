@@ -1,11 +1,14 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Badge, Card, CardBody, CardImg, CardSubtitle, CardTitle, Col, Input, ListGroup, ListGroupItem, Row, Spinner, Table } from "reactstrap";
 import { IconWand, IconUser, IconGenderMale, IconGift, IconAspectRatio, IconWood, IconBolt, IconHomePlus, IconChefHat } from '@tabler/icons';
 import CharacterType from "../../../types/api/characterType";
-import { getPersonagensByHouse } from "../../../services/apiService";
+import { fetchPersonagensByHouse } from "../../../services/apiService";
 import { CHARACTER_LIST_KEY } from "../../../utils/constants";
 import { useSessionStorage } from "usehooks-ts";
+import { useQuery } from "react-query";
+import Image from "next/image";
+import shimmer from "../../../utils/shimmer";
 
 const tableStyle: React.CSSProperties = {
     maxHeight: '80vh'
@@ -14,21 +17,15 @@ const tableStyle: React.CSSProperties = {
 const IndexPersonagens = () => {
     const router = useRouter();
     const namePersonagem = router.query.personagem as string;
-    const [personagensHouse, setPersonagensHouse] = useState<CharacterType[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [characters, __] = useSessionStorage<CharacterType[]>(CHARACTER_LIST_KEY, []);
 
-    const personagem = useMemo(() => characters.find(f => f.name === namePersonagem), [characters, namePersonagem]); 
+    const personagem = useMemo(() => characters.find(f => f.name === namePersonagem), [characters, namePersonagem]);
 
-    useEffect(() => {
-        if (personagem) {
-            const fetchPersonagens = async () => {
-                setPersonagensHouse(await getPersonagensByHouse(personagem.house || ''));
-                setIsLoading(false);
-            };
-            fetchPersonagens();
-        }
-    }, [personagem]);
+    const { isLoading, data: personagensHouse } = useQuery<CharacterType[], Error>(['characterItem', personagem?.house],
+        () => fetchPersonagensByHouse(personagem?.house),
+        {
+            enabled: personagem ? true : false
+        });
 
     if (!personagem)
         return (<></>);
@@ -39,7 +36,13 @@ const IndexPersonagens = () => {
                 {/* Profile */}
                 <Col sm={12} md={6} lg={4} xl={2}>
                     <Card>
-                        <CardImg src={personagem.image} className="img-fluid p-1 rounded-3" />
+                        <CardImg 
+                            src={personagem.image} tag={Image}
+                            placeholder="blur"
+                            blurDataURL={`data:image/svg+xml;base64,${shimmer(600, 400)}`}
+                            width={600}
+                            height={400}
+                            className="img-fluid p-1 rounded-3" />
                         <CardBody>
                             <Row>
                                 <Col className="d-flex justify-content-around align-items-center">
