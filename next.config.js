@@ -1,5 +1,5 @@
 module.exports = {
     images: {
-        domains: ["picsum.photos", "hp-api.herokuapp.com"],
+        domains: ["picsum.photos", "static.wikia.nocookie.net", "upload.wikimedia.org"],
     },
 }

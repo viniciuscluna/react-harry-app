@@ -38,8 +38,8 @@ const App = ({ magias }: MagiasProp) => {
           {magias.map((magia, index) =>
             <tr key={index}>
               <th scope="row">{index + 1}</th>
-              <td>{magia.name}</td>
-              <td>{magia.description}</td>
+              <td>{magia.attributes.name}</td>
+              <td>{magia.attributes.effect}</td>
             </tr>
           )}
 

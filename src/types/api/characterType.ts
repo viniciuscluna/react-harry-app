@@ -1,21 +1,18 @@
 export default interface CharacterType {
-    name: string;
-    species: string;
-    image: string;
-    gender: string;
-    house: string;
-    wizard: boolean;
-    yearOfBirth: number;
-    dateOfBirth: Date;
-    wand: WandType;
-    hogwartsStudent: boolean;
-    hogwartsStaff: boolean;
-
-    actor: string;
+    id: string;
+    attributes: CharacterTypeAttributes;
 }
 
-export interface WandType {
-    wood: string;
-    core: string;
-    length: number;
+interface CharacterTypeAttributes {
+    slug: string;
+    name: string;
+    born: string;
+    gender: string;
+    image: string;
+    wiki: string;
+    species: string;
+}
+
+export interface CharacterTypeData {
+    data: CharacterType[]
 }
